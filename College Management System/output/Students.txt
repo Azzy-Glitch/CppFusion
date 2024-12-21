@@ -1,1 +1,3 @@
-Abdul Aziz,12,1200
+ali,3,409
+arham,5,500
+hira,3,500
