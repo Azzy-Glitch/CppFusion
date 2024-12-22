@@ -1,0 +1,4 @@
+﻿  Confps.cpp
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\Confps\Confps.cpp(156,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\Confps\Confps.cpp(165,17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Confps.vcxproj -> C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\Confps\x64\Debug\Confps.exe

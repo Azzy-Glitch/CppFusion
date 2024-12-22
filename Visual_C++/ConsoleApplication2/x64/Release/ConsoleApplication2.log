@@ -1,0 +1,53 @@
+﻿  Game.cpp
+  main.cpp
+  Player.cpp
+  stdafx.cpp
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(31,28): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(31,28): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(31,28): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(31,28): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(31,28): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(116,26): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(116,26): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(116,26): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(116,26): warning C4244:             T=float
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(116,26): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(152,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(152,29): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(152,29): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(152,29): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(152,29): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(153,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(153,31): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(153,31): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(153,31): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(153,31): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(165,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(165,29): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(165,29): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(165,29): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(165,29): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(166,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(166,31): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(166,31): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(166,31): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(166,31): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(181,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(181,29): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(181,29): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(181,29): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(181,29): warning C4244:         ]
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(182,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(182,31): warning C4244:         with
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(182,31): warning C4244:         [
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(182,31): warning C4244:             T=int
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(182,31): warning C4244:         ]
+  Tile.cpp
+  TileMap.cpp
+  Generating code
+C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\Player.cpp(66): warning C4172: returning address of local variable or temporary: anim_switch
+  399 of 399 functions (100.0%) were compiled.
+    396 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ConsoleApplication2.vcxproj -> C:\Users\830\OneDrive\Desktop\C++ Projects\Visual_C++\ConsoleApplication2\x64\Release\ConsoleApplication2.exe
