@@ -67,3 +67,28 @@
 1700653234 source:d:\git repository\projects\c++ projects\snake\src\snake.cpp
 	"Snake.h"
 
+1707054475 source:d:\git repository\cppfusion\snake\main.cpp
+	<iostream>
+	<conio.h>
+	<ctime>
+	"Snake.h"
+	"Food.h"
+
+1700653347 d:\git repository\cppfusion\snake\include\snake.h
+	<windows.h>
+	<vector>
+
+1700998978 d:\git repository\cppfusion\snake\include\food.h
+	<windows.h>
+	<cstdio>
+	<chrono>
+
+1700998896 source:d:\git repository\cppfusion\snake\src\food.cpp
+	"Food.h"
+	<iostream>
+	<ctime>
+	<chrono>
+
+1700653234 source:d:\git repository\cppfusion\snake\src\snake.cpp
+	"Snake.h"
+
