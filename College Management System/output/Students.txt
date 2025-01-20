@@ -1,2 +1,4 @@
-Talha,1C,5678
-Abdul Aziz,1D,9847
+SHEHROZ AMIR,BSCS 1C,350
+Abdul aziz,bscs 1c,400
+harris,bscs 1c,677
+ayan kashif,bscs 1c,560
