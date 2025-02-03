@@ -1,12 +1,7 @@
-#include<iostream>
-#include"GetAndDisplay.h"
+#include "SchoolSystem.h"
 
-using namespace std;
-
-int main()
-{
-    GetAndDisplay obj;
-    obj.getAndDisplayData();
-
+int main() {
+    SchoolSystem::initialize();
+    SchoolSystem::mainMenu();
     return 0;
 }

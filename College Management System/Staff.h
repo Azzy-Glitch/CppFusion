@@ -1,77 +1,93 @@
 #ifndef STAFF_H
 #define STAFF_H
 
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <limits>
+#include "Person.h"
 
-using namespace std;
-
-class Staff
+class Staff : public Person
 {
-    string name;
-    int salary;
-    string department;
+    std::string department;
+    std::string position;
+    static std::vector<Staff> staffMembers;
 
 public:
-    Staff(string n = "", int sal = 0, string d = "")
-        : name(n), salary(sal), department(d) {}
+    Staff(const std::string &n = "", const std::string &dept = "",
+          const std::string &pos = "")
+        : Person(n), department(dept), position(pos) {}
 
-    void displayStaffData() const
+    void display() const override
     {
-        cout << "Staff Member Name: "
-             << name
-             << ", Salary: " << salary
-             << ", Department: " << department << endl;
+        std::cout << "Staff Member: " << name << "\nDepartment: " << department
+                  << "\nPosition: " << position << "\n\n";
     }
 
-    static void getStaffData(vector<Staff> &staffs)
+    void getData() override
     {
-        int Size;
-        cout << "Enter the number of Staff Members: ";
-        while (!(cin >> Size) || Size < 0)
+        std::cout << "Enter staff name: ";
+        while (std::getline(std::cin, name) && !isValidName(name))
         {
-            cout << "Invalid input. Please enter a valid number: ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-        cin.ignore();
-
-        ofstream outFile("Staff.txt");
-        if (!outFile.is_open())
-        {
-            cerr << "Error: Could not open file Staff.txt for writing.\n";
-            return;
+            std::cout << "Invalid name! Enter again: ";
         }
 
-        for (int i = 0; i < Size; i++)
+        std::cout << "Enter department: ";
+        std::getline(std::cin, department);
+
+        std::cout << "Enter position: ";
+        std::getline(std::cin, position);
+    }
+
+    void saveToFile() const override
+    {
+        std::ofstream file("staff.txt", std::ios::app);
+        if (file)
         {
-            string n, d;
-            int sal;
+            file << name << "," << department << "," << position << "\n";
+        }
+    }
 
-            cout << "\nEnter details for Staff Member " << i + 1 << ":\n";
+    static void loadFromFile()
+    {
+        staffMembers.clear();
+        std::ifstream file("staff.txt");
+        std::string line;
 
-            cout << "Enter Staff Name: ";
-            getline(cin, n);
+        while (std::getline(file, line))
+        {
+            size_t pos1 = line.find(',');
+            size_t pos2 = line.find(',', pos1 + 1);
 
-            cout << "Enter Department: ";
-            getline(cin, d);
-
-            cout << "Enter Salary: " << endl;
-            while (!(cin >> sal) || sal < 0)
+            if (pos1 != std::string::npos && pos2 != std::string::npos)
             {
-                cout << "Invalid input. Please enter a valid salary: ";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            cin.ignore();
+                std::string name = line.substr(0, pos1);
+                std::string dept = line.substr(pos1 + 1, pos2 - pos1 - 1);
+                std::string pos = line.substr(pos2 + 1);
 
-            staffs.push_back(Staff(n, sal, d));
-            outFile << n << "," << sal << "," << d << endl;
+                staffMembers.emplace_back(name, dept, pos);
+            }
         }
-        outFile.close();
+    }
+
+    static void displayAll()
+    {
+        for (const auto &staff : staffMembers)
+        {
+            staff.display();
+        }
+    }
+
+    static void search(const std::string &query)
+    {
+        for (const auto &staff : staffMembers)
+        {
+            if (staff.name.find(query) != std::string::npos ||
+                staff.department.find(query) != std::string::npos ||
+                staff.position.find(query) != std::string::npos)
+            {
+                staff.display();
+            }
+        }
     }
 };
+
+std::vector<Staff> Staff::staffMembers;
 
 #endif

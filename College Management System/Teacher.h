@@ -1,76 +1,96 @@
 #ifndef TEACHER_H
 #define TEACHER_H
 
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <limits>
+#include "Person.h"
 
-using namespace std;
-
-class Teacher
+class Teacher : public Person
 {
-    string name;
-    string subject;
-    int salary;
+    std::string subject;
+    double salary;
+    static std::vector<Teacher> teachers;
 
 public:
-    Teacher(string n = "", string s = "", int sal = 0)
-        : name(n), subject(s), salary(sal) {}
+    Teacher(const std::string &n = "", const std::string &subj = "", double sal = 0)
+        : Person(n), subject(subj), salary(sal) {}
 
-    void displayTeacherData() const
+    void display() const override
     {
-        cout << "Teacher Name: " << name
-             << ", Subject: " << subject
-             << ", Salary: " << salary << endl;
+        std::cout << "Teacher: " << name << "\nSubject: " << subject
+                  << "\nSalary: $" << salary << "\n\n";
     }
 
-    static void getTeacherData(vector<Teacher> &teachers)
+    void getData() override
     {
-        int Size;
-        cout << "Enter the number of Teachers: ";
-        while (!(cin >> Size) || Size < 0)
+        std::cout << "Enter teacher name: ";
+        while (std::getline(std::cin, name) && !isValidName(name))
         {
-            cout << "Invalid input. Please enter a valid number: ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-        cin.ignore();
-
-        ofstream outFile("Teacher.txt");
-        if (!outFile.is_open())
-        {
-            cerr << "Error: Could not open file Teacher.txt for writing.\n";
-            return;
+            std::cout << "Invalid name! Enter again: ";
         }
 
-        for (int i = 0; i < Size; i++)
+        std::cout << "Enter subject: ";
+        std::getline(std::cin, subject);
+
+        std::cout << "Enter salary: ";
+        while (!(std::cin >> salary) || salary <= 0)
         {
-            string n, s;
-            int sal;
+            std::cout << "Invalid input! Enter positive number: ";
+            clearInputBuffer();
+        }
+        clearInputBuffer();
+    }
 
-            cout << "\nEnter details for Teacher " << i + 1 << ":\n";
+    void saveToFile() const override
+    {
+        std::ofstream file("teachers.txt", std::ios::app);
+        if (file)
+        {
+            file << name << "," << subject << "," << salary << "\n";
+        }
+    }
 
-            cout << "Enter Teacher Name: ";
-            getline(cin, n);
+    static void loadFromFile()
+    {
+        teachers.clear();
+        std::ifstream file("teachers.txt");
+        std::string line;
 
-            cout << "Enter Subject: ";
-            getline(cin, s);
+        while (std::getline(file, line))
+        {
+            size_t pos1 = line.find(',');
+            size_t pos2 = line.find(',', pos1 + 1);
 
-            cout << "Enter Salary: " << endl;
-            while (!(cin >> sal) || sal < 0)
+            if (pos1 != std::string::npos && pos2 != std::string::npos)
             {
-                cout << "Invalid input. Please enter a valid salary: ";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            cin.ignore();
+                std::string name = line.substr(0, pos1);
+                std::string subj = line.substr(pos1 + 1, pos2 - pos1 - 1);
+                double sal = std::stod(line.substr(pos2 + 1));
 
-            teachers.push_back(Teacher(n, s, sal));
-            outFile << n << "," << s << "," << sal << endl;
+                teachers.emplace_back(name, subj, sal);
+            }
         }
-        outFile.close();
+    }
+
+    static void displayAll()
+    {
+        for (const auto &teacher : teachers)
+        {
+            teacher.display();
+        }
+    }
+
+    static void search(const std::string &query)
+    {
+        for (const auto &teacher : teachers)
+        {
+            if (teacher.name.find(query) != std::string::npos ||
+                teacher.subject.find(query) != std::string::npos)
+            {
+                teacher.display();
+            }
+        }
     }
 };
+
+std::vector<Teacher> Teacher::teachers;
 
 #endif
