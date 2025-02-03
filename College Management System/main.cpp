@@ -1,7 +1,8 @@
-#include "SchoolSystem.h"
+#include "InstituteManagement.h"
 
-int main() {
-    SchoolSystem::initialize();
-    SchoolSystem::mainMenu();
+int main()
+{
+    InstituteSystem::initialize();
+    InstituteSystem::mainMenu();
     return 0;
 }

@@ -1,11 +1,11 @@
-#ifndef SCHOOL_SYSTEM_H
-#define SCHOOL_SYSTEM_H
+#ifndef INSTITUTE_MANAGEMENT_H
+#define INSTITUTE_MANAGEMENT_H
 
 #include "Student.h"
 #include "Teacher.h"
 #include "Staff.h"
 
-class SchoolSystem
+class InstituteSystem
 {
     static bool adminAuthenticated;
 
@@ -141,6 +141,6 @@ public:
     }
 };
 
-bool SchoolSystem::adminAuthenticated = false;
+bool InstituteSystem::adminAuthenticated = false;
 
 #endif
