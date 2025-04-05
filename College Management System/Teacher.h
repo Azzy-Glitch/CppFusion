@@ -2,36 +2,38 @@
 #define TEACHER_H
 
 #include "Person.h"
+#include <fstream>
+#include <algorithm>
 
 class Teacher : public Person
 {
-    std::string subject;
-    double salary;
+    std::string teachingSubject;
+    double teacherSalary;
+public:
     static std::vector<Teacher> teachers;
 
-public:
     Teacher(const std::string &n = "", const std::string &subj = "", double sal = 0)
-        : Person(n), subject(subj), salary(sal) {}
+        : Person(n), teachingSubject(subj), teacherSalary(sal) {}
 
     void display() const override
     {
-        std::cout << "Teacher: " << name << "\nSubject: " << subject
-                  << "\nSalary: $" << salary << "\n\n";
+        std::cout << "Teacher: " << personName << "\nSubject: " << teachingSubject
+                  << "\nSalary: $" << teacherSalary << "\n\n";
     }
 
     void getData() override
     {
         std::cout << "Enter teacher name: ";
-        while (std::getline(std::cin, name) && !isValidName(name))
+        while (std::getline(std::cin, personName) && !isValidName(personName))
         {
             std::cout << "Invalid name! Enter again: ";
         }
 
         std::cout << "Enter subject: ";
-        std::getline(std::cin, subject);
+        std::getline(std::cin, teachingSubject);
 
         std::cout << "Enter salary: ";
-        while (!(std::cin >> salary) || salary <= 0)
+        while (!(std::cin >> teacherSalary) || teacherSalary <= 0)
         {
             std::cout << "Invalid input! Enter positive number: ";
             clearInputBuffer();
@@ -44,7 +46,7 @@ public:
         std::ofstream file("teachers.txt", std::ios::app);
         if (file)
         {
-            file << name << "," << subject << "," << salary << "\n";
+            file << personName << "," << teachingSubject << "," << teacherSalary << "\n";
         }
     }
 
@@ -82,12 +84,38 @@ public:
     {
         for (const auto &teacher : teachers)
         {
-            if (teacher.name.find(query) != std::string::npos ||
-                teacher.subject.find(query) != std::string::npos)
+            if (teacher.personName.find(query) != std::string::npos ||
+                teacher.teachingSubject.find(query) != std::string::npos)
             {
                 teacher.display();
             }
         }
+    }
+
+    static Teacher* findTeacherByName(const std::string& name) {
+        for (auto& teacher : teachers) {
+            if (teacher.personName == name) {
+                return &teacher;
+            }
+        }
+        return nullptr;
+    }
+
+    static void updateTeacher(Teacher& updatedTeacher) {
+        for (auto& teacher : teachers) {
+            if (teacher.personName == updatedTeacher.personName) {
+                teacher = updatedTeacher;
+                break;
+            }
+        }
+    }
+
+    static void removeTeacher(const std::string& name) {
+        teachers.erase(
+            std::remove_if(teachers.begin(), teachers.end(),
+                [name](const Teacher& t) { return t.personName == name; }),
+            teachers.end()
+        );
     }
 };
 

@@ -2,12 +2,15 @@
 #define STUDENT_H
 
 #include "Person.h"
+#include <fstream>
+#include <algorithm>
 
 class Student : public Person
 {
     std::string className;
     int rollNumber;
     std::map<std::string, std::pair<int, char>> academicRecord; // subject: (marks, grade)
+public:
     static std::vector<Student> students;
 
     char calculateGrade(int marks) const
@@ -23,14 +26,13 @@ class Student : public Person
         return 'F';
     }
 
-public:
     Student(const std::string &n = "", const std::string &cls = "", int roll = 0)
         : Person(n), className(cls), rollNumber(roll) {}
 
     void display() const override
     {
         std::cout << std::left
-                  << std::setw(20) << name
+                  << std::setw(20) << personName
                   << std::setw(15) << className
                   << std::setw(10) << rollNumber
                   << "\n";
@@ -39,7 +41,7 @@ public:
     void displayAcademicRecord() const
     {
         printSectionHeader("Academic Record");
-        std::cout << "Student Name: " << name << "\n"
+        std::cout << "Student Name: " << personName << "\n"
                   << "Class: " << className << "\n"
                   << "Roll Number: " << rollNumber << "\n\n";
 
@@ -63,7 +65,7 @@ public:
     void getData() override
     {
         std::cout << "Enter student name: ";
-        while (std::getline(std::cin, name) && !isValidName(name))
+        while (std::getline(std::cin, personName) && !isValidName(personName))
         {
             std::cout << "Invalid name! Enter again: ";
         }
@@ -79,32 +81,32 @@ public:
         }
         clearInputBuffer();
 
-        int subjectCount;
+        int numberOfSubjects;
         std::cout << "Number of subjects: ";
-        while (!(std::cin >> subjectCount) || subjectCount <= 0)
+        while (!(std::cin >> numberOfSubjects) || numberOfSubjects <= 0)
         {
             std::cout << "Invalid input! Enter positive number: ";
             clearInputBuffer();
         }
         clearInputBuffer();
 
-        for (int i = 0; i < subjectCount; i++)
+        for (int i = 0; i < numberOfSubjects; i++)
         {
-            std::string subjectName;
-            int marks;
+            std::string currentSubjectName;
+            int subjectMarks;
 
             std::cout << "Subject " << i + 1 << " name: ";
-            std::getline(std::cin, subjectName);
+            std::getline(std::cin, currentSubjectName);
 
             std::cout << "Marks (0-100): ";
-            while (!(std::cin >> marks) || marks < 0 || marks > 100)
+            while (!(std::cin >> subjectMarks) || subjectMarks < 0 || subjectMarks > 100)
             {
                 std::cout << "Invalid marks! Enter between 0-100: ";
                 clearInputBuffer();
             }
             clearInputBuffer();
 
-            academicRecord[subjectName] = {marks, calculateGrade(marks)};
+            academicRecord[currentSubjectName] = {subjectMarks, calculateGrade(subjectMarks)};
         }
     }
 
@@ -113,7 +115,7 @@ public:
         std::ofstream file("students.dat", std::ios::app);
         if (file)
         {
-            file << name << "|" << className << "|" << rollNumber;
+            file << personName << "|" << className << "|" << rollNumber;
             for (const auto &subject : academicRecord)
             {
                 file << "|" << subject.first << ":"
@@ -179,7 +181,7 @@ public:
                   << std::setw(15) << "Class"
                   << std::setw(10) << "Roll No."
                   << "\n";
-        printDivider(45);
+        Student::printDivider(45);
 
         for (const auto &student : students)
         {
@@ -201,6 +203,32 @@ public:
         std::cout << "\nStudent with roll number " << roll << " not found!\n";
     }
 
+    static Student* findStudentByRollNumber(int rollNumber) {
+        for (auto& student : students) {
+            if (student.rollNumber == rollNumber) {
+                return &student;
+            }
+        }
+        return nullptr;
+    }
+
+    static void updateStudent(Student& updatedStudent) {
+        for (auto& student : students) {
+            if (student.rollNumber == updatedStudent.rollNumber) {
+                student = updatedStudent;
+                break;
+            }
+        }
+    }
+
+    static void removeStudent(int rollNumber) {
+        students.erase(
+            std::remove_if(students.begin(), students.end(),
+                [rollNumber](const Student& s) { return s.rollNumber == rollNumber; }),
+            students.end()
+        );
+    }
+
 private:
     static void printSectionHeader(const std::string &title)
     {
@@ -214,4 +242,5 @@ private:
 };
 
 std::vector<Student> Student::students;
+
 #endif

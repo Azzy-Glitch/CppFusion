@@ -2,37 +2,39 @@
 #define STAFF_H
 
 #include "Person.h"
+#include <fstream>
+#include <algorithm>
 
 class Staff : public Person
 {
-    std::string department;
-    std::string position;
+    std::string departmentName;
+    std::string positionTitle;
+public:
     static std::vector<Staff> staffMembers;
 
-public:
     Staff(const std::string &n = "", const std::string &dept = "",
           const std::string &pos = "")
-        : Person(n), department(dept), position(pos) {}
+        : Person(n), departmentName(dept), positionTitle(pos) {}
 
     void display() const override
     {
-        std::cout << "Staff Member: " << name << "\nDepartment: " << department
-                  << "\nPosition: " << position << "\n\n";
+        std::cout << "Staff Member: " << personName << "\nDepartment: " << departmentName
+                  << "\nPosition: " << positionTitle << "\n\n";
     }
 
     void getData() override
     {
         std::cout << "Enter staff name: ";
-        while (std::getline(std::cin, name) && !isValidName(name))
+        while (std::getline(std::cin, personName) && !isValidName(personName))
         {
             std::cout << "Invalid name! Enter again: ";
         }
 
         std::cout << "Enter department: ";
-        std::getline(std::cin, department);
+        std::getline(std::cin, departmentName);
 
         std::cout << "Enter position: ";
-        std::getline(std::cin, position);
+        std::getline(std::cin, positionTitle);
     }
 
     void saveToFile() const override
@@ -40,7 +42,7 @@ public:
         std::ofstream file("staff.txt", std::ios::app);
         if (file)
         {
-            file << name << "," << department << "," << position << "\n";
+            file << personName << "," << departmentName << "," << positionTitle << "\n";
         }
     }
 
@@ -78,13 +80,39 @@ public:
     {
         for (const auto &staff : staffMembers)
         {
-            if (staff.name.find(query) != std::string::npos ||
-                staff.department.find(query) != std::string::npos ||
-                staff.position.find(query) != std::string::npos)
+            if (staff.personName.find(query) != std::string::npos ||
+                staff.departmentName.find(query) != std::string::npos ||
+                staff.positionTitle.find(query) != std::string::npos)
             {
                 staff.display();
             }
         }
+    }
+
+    static Staff* findStaffByName(const std::string& name) {
+        for (auto& staff : staffMembers) {
+            if (staff.personName == name) {
+                return &staff;
+            }
+        }
+        return nullptr;
+    }
+
+    static void updateStaff(Staff& updatedStaff) {
+        for (auto& staff : staffMembers) {
+            if (staff.personName == updatedStaff.personName) {
+                staff = updatedStaff;
+                break;
+            }
+        }
+    }
+
+    static void removeStaff(const std::string& name) {
+        staffMembers.erase(
+            std::remove_if(staffMembers.begin(), staffMembers.end(),
+                [name](const Staff& s) { return s.personName == name; }),
+            staffMembers.end()
+        );
     }
 };
 

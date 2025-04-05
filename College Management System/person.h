@@ -3,16 +3,18 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <vector>
 #include <map>
 #include <limits>
 #include <iomanip>
+#include <ctime>
+#include <fstream>
+#include <algorithm>
 
 class Person {
 protected:
-    std::string name;
-    static std::string adminPassword;
+    std::string personName;
+    static std::string administratorPassword;
 
     void printSectionHeader(const std::string& title) const {
         std::cout << "\n=== " << title << " ===\n";
@@ -23,7 +25,7 @@ protected:
     }
 
 public:
-    Person(const std::string& n = "") : name(n) {}
+    Person(const std::string& n = "") : personName(n) {}
     virtual ~Person() {}
     
     virtual void display() const = 0;
@@ -46,11 +48,11 @@ public:
     }
 
     static bool authenticateAdmin() {
-        std::string inputPass;
+        std::string inputPassword;
         std::cout << "Enter admin password: ";
-        std::getline(std::cin, inputPass);
+        std::getline(std::cin, inputPassword);
         
-        if(inputPass == adminPassword) {
+        if(inputPassword == administratorPassword) {
             std::cout << "Authentication successful!\n";
             return true;
         }
@@ -61,14 +63,14 @@ public:
     static void changeAdminPassword() {
         if(!authenticateAdmin()) return;
         
-        std::string newPass;
+        std::string newPassword;
         std::cout << "Enter new admin password: ";
-        std::getline(std::cin, newPass);
-        adminPassword = newPass;
+        std::getline(std::cin, newPassword);
+        administratorPassword = newPassword;
         std::cout << "Password changed successfully!\n";
     }
 };
 
-std::string Person::adminPassword = "2917";
+std::string Person::administratorPassword = "2917";
 
 #endif
